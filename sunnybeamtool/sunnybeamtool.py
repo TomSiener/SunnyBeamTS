@@ -65,7 +65,9 @@ class SunnyBeam:
         Returns:
             dict[str, any]: Returns power, energy_today and energy_total measurements in a dict
         """
+        _LOGGER.debug("before _connect")
         await self._connect()
+        _LOGGER.debug("after _connect")
         try:
             _LOGGER.debug("before _do_syn_online")
             await self._do_syn_online()
@@ -148,22 +150,26 @@ class SunnyBeam:
             self._dev.manufacturer,
             self._dev.serial_number,
         )
+        _LOGGER.debug("await loop.run_in_executor(None, lambda: util.claim_interface")
         await loop.run_in_executor(None, lambda: util.claim_interface(self._dev, 0))
-
+        _LOGGER.debug("First do a SET_FEATURE config")
         # First do a SET_FEATURE config
         try:
+            _LOGGER.debug("response = await loop.run_in_executor")
             response = await loop.run_in_executor(
                 None,
                 lambda: self._dev.ctrl_transfer(
                     bmRequestType=0x40, bRequest=0x03, wIndex=0x0000, wValue=0x4138
                 ),
             )
+            _LOGGER.debug("
             if response != 0:
                 raise ConnectionError("Could not set required features to device")
         except core.USBError as err:
             raise ConnectionError("Could not set required features to device") from err
 
         # Fetching device ID
+        _LOGGER.debug("# Fetching device ID")
         if self._device_id is None:
             self._device_id = await self._search_device_id()
             _LOGGER.debug(
