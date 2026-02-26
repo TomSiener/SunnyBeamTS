@@ -4,9 +4,10 @@ import asyncio
 import logging
 import struct
 from datetime import datetime
-
 import crcmod
 from usb import core, util
+
+import pdb  #zum debuggen
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -150,6 +151,9 @@ class SunnyBeam:
             self._dev.manufacturer,
             self._dev.serial_number,
         )
+        
+        pdb.set_trace()  #zum debuggen
+        
         _LOGGER.debug("await loop.run_in_executor(None, lambda: util.claim_interface")
         await loop.run_in_executor(None, lambda: util.claim_interface(self._dev, 0))
         _LOGGER.debug("First do a SET_FEATURE config")
@@ -171,6 +175,7 @@ class SunnyBeam:
         # Fetching device ID
         _LOGGER.debug("# Fetching device ID")
         if self._device_id is None:
+            _LOGGER.debug("self._device_id = await self._search_device_id()")
             self._device_id = await self._search_device_id()
             _LOGGER.debug(
                 "device id= "
