@@ -103,9 +103,12 @@ class SunnyBeam:
         """
         await self._connect()
         try:
+            _LOGGER.debug("data = await self._do_combined_read_messages(GET_TODAY_CMD)")
             data = await self._do_combined_read_messages(GET_TODAY_CMD)
+            _LOGGER.debug("return self._parse_measurements(rawdata=data)")
             return self._parse_measurements(rawdata=data)
         except ConnectionError as err:
+            _LOGGER.debug("ConnectionError1")
             self._connected = False
             raise err
 
@@ -182,8 +185,11 @@ class SunnyBeam:
                 + hex(self._device_id[1]).lstrip("0x")
                 + hex(self._device_id[0]).lstrip("0x")
             )
+        _LOGGER.debug("await asyncio.sleep(0.7)")
         await asyncio.sleep(0.7)
+        _LOGGER.debug("self._connected = True")
         self._connected = True
+        _LOGGER.debug("end connect")
 
     async def _do_combined_read_messages(self, input_msg: bytearray) -> bytearray:
 
