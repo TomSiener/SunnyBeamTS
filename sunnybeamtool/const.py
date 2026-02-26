@@ -123,7 +123,7 @@ BASIC_MSG = bytearray(
         0x00,
         0x90,
         0x00,
-        0x02,
+        0x03,
         0x00,
         0x00,
         0x00,
