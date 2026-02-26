@@ -14,13 +14,20 @@ async def main():
 
     while True:
         try:
+            _LOGGER.debug("example get_manufacturer")            
             print(await s_beam.get_manufacturer())
+            
+            _LOGGER.debug("example get_manufacturer")
             print(await s_beam.get_product())
+            
+            _LOGGER.debug("example get_serial_number")
             print(await s_beam.get_serial_number())
 
+            _LOGGER.debug("example get_measurements")
             data = await s_beam.get_measurements()
             print(data)
-
+            
+            _LOGGER.debug("example get_manufacturer")
             data = await s_beam.get_today_measurements()
             # print(data)
 
