@@ -155,7 +155,7 @@ class SunnyBeam:
             self._dev.serial_number,
         )
         
-        pdb.set_trace()  #zum debuggen
+        #pdb.set_trace()  #zum debuggen
         
         _LOGGER.debug("await loop.run_in_executor(None, lambda: util.claim_interface")
         await loop.run_in_executor(None, lambda: util.claim_interface(self._dev, 0))
