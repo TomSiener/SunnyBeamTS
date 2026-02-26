@@ -123,7 +123,7 @@ BASIC_MSG = bytearray(
         0x00,
         0x90,
         0x00,
-        0x04,  #ts geändert von 02 auf 03 auf 04
+        0x02,  #ts geändert von 02 auf 03 auf 04 auf 02
         0x00,
         0x00,
         0x00,
