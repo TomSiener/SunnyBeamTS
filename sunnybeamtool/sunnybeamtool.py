@@ -67,7 +67,9 @@ class SunnyBeam:
         """
         await self._connect()
         try:
+            _LOGGER.debug("before _do_syn_online")
             await self._do_syn_online()
+            _LOGGER.debug("before GET_MEASUREMENTS_CMD")
             await self._send_raw_message(GET_MEASUREMENTS_CMD, True)
 
             buf = await self._read_raw_message(50)
