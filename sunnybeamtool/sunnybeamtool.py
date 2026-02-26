@@ -162,7 +162,7 @@ class SunnyBeam:
                     bmRequestType=0x40, bRequest=0x03, wIndex=0x0000, wValue=0x4138
                 ),
             )
-            _LOGGER.debug("
+            _LOGGER.debug(" if response != 0:")
             if response != 0:
                 raise ConnectionError("Could not set required features to device")
         except core.USBError as err:
