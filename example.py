@@ -14,9 +14,9 @@ async def main():
 
     while True:
         try:
-            # print(await s_beam.get_manufacturer())
-            # print(await s_beam.get_product())
-            # print(await s_beam.get_serial_number())
+            print(await s_beam.get_manufacturer())
+            print(await s_beam.get_product())
+            print(await s_beam.get_serial_number())
 
             data = await s_beam.get_measurements()
             print(data)
