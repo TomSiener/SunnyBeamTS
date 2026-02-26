@@ -409,10 +409,13 @@ class SunnyBeam:
         BASIC_MSG[12:16] = bytearray(
             serial_number_prepared.to_bytes(length=4, byteorder="little")
         )
-
+        _LOGGER.debug("await self._send_raw_message(BASIC_MSG, False)")
         await self._send_raw_message(BASIC_MSG, False)
+        _LOGGER.debug("data = await self._read_raw_message(20)")
         data = await self._read_raw_message(20)
+        _LOGGER.debug("if len(data) < 7:")
         if len(data) < 7:
+            _LOGGER.debug("raise ConnectionError(Device does not respond)")
             raise ConnectionError("Device does not respond")
         return data[5:7]
 
