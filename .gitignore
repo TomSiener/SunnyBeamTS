@@ -4,5 +4,6 @@ build/
 dist/
 sunnybeamtool.egg-info/
 .venv/
+.env
 
 __pycache__
