@@ -45,8 +45,10 @@ class SunnyBeam:
         Returns:
             str: serial number as string
         """
+        _LOGGER.debug("example get_manufacturer await self._connect()")
         await self._connect()
-        return self._dev.manufacturer
+        _LOGGER.debug("example get_manufacturer return self._dev.manufacturer")
+        return self._dev.manufacturer        
 
     async def get_serial_number(self) -> str:
         """Get device serial number
