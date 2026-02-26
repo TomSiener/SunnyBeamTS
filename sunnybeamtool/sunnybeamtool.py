@@ -430,4 +430,4 @@ class SunnyBeam:
         _LOGGER.debug("await self._read_raw_message(5)  # always read dummy data")
         await self._read_raw_message(5)  # always read dummy data
         LOGGER.debug("end of code ")
-_LOGGER.debug("
+        
