@@ -27,12 +27,12 @@ async def main():
             data = await s_beam.get_measurements()
             print("get_measurements:", data)
             
-            logging.debug("example get_manufacturer")
-            data = await s_beam.get_today_measurements()
-            print("get_today_measurements:", data)
+            #logging.debug("example get_manufacturer")
+            #data = await s_beam.get_today_measurements()
+            #print("get_today_measurements:", data)
 
-            data = await s_beam.get_last_month_measurements()
-            print("get_last_month_measurements:", data)
+            #data = await s_beam.get_last_month_measurements()
+            #print("get_last_month_measurements:", data)
 
         except ConnectionError as e:
             print(str(e))
