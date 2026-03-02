@@ -35,7 +35,6 @@ MQTT_BROKER = os.getenv("MQTT_BROKER")
 MQTT_USER   = os.getenv("MQTT_USER")
 MQTT_PW     = os.getenv("MQTT_PW")
 MQTT_TOPIC  = "PV/SunnyBeam/"
-print(f"MQTT-Topic:{MQTT_TOPIC}")
 
 # --- INITIALISIERUNG ---
 client_mqtt = None
@@ -43,14 +42,17 @@ client_mb   = None
 
 if MQTT_AKTIV:
     # Pflicht für Paho 2.1: CallbackAPIVersion angeben
+    logging.info("connecting to MQTT ...") 
     client_mqtt = mqtt.Client(mqtt.CallbackAPIVersion.VERSION2)
     client_mqtt.username_pw_set(MQTT_USER, MQTT_PW)
 
 if MODBUS_AKTIV:
+    logging.info("connecting to Fronius ...") 
     client_mb = ModbusTcpClient(FRONIUS_IP, port=FRONIUS_PORT)
 
 async def main():
     try:
+        logging.info("connecting to SunnyBeam ...") 
         s_beam = SunnyBeam()
         await asyncio.sleep(2)
         data = await s_beam.get_measurements()
