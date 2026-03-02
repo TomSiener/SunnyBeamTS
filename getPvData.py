@@ -11,7 +11,7 @@ import logging
 from sunnybeamtool.sunnybeamtool import SunnyBeam
 
 logging.basicConfig()
-logging.getLogger().setLevel(logging.INFO)
+logging.getLogger().setLevel(logging.DEBUG)
 
 # --- LADE KONFIGURATION ---
 load_dotenv() # Liest die .env Datei ein
@@ -49,6 +49,9 @@ if MQTT_AKTIV:
 if MODBUS_AKTIV:
     logging.info("connecting to Fronius ...") 
     client_mb = ModbusTcpClient(FRONIUS_IP, port=FRONIUS_PORT)
+    logging.debug("after connecting to Fronius1") 
+
+logging.debug("after connecting to Fronius2") 
 
 async def main():
     try:
