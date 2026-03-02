@@ -36,6 +36,9 @@ MQTT_USER   = os.getenv("MQTT_USER")
 MQTT_PW     = os.getenv("MQTT_PW")
 MQTT_TOPIC  = "PV/SunnyBeam/"
 
+#Korrektur des TotalWerts damit es keinen Spring gibt von 0 auf 43000
+ENERGY_TOTAL_KORR = -43800
+
 # --- INITIALISIERUNG ---
 client_mqtt = None
 client_mb   = None
@@ -82,7 +85,9 @@ async def main():
             # 1. MQTT Senden
             if MQTT_AKTIV:
                 client_mqtt.publish(MQTT_TOPIC + "power" , data.get("power"))
-                status_msg += "mqtt-power gesendet. "
+                client_mqtt.publish(MQTT_TOPIC + "energy_today" , data.get("energy_today"))
+                client_mqtt.publish(MQTT_TOPIC + "energy_total" , data.get("energy_total")+ENERGY_TOTAL_KORR)
+                status_msg += "MQTT-Werte gesendet. "
     
             # 2. Modbus Senden (Fronius Float32)
             if MODBUS_AKTIV and client_mb.connected:
