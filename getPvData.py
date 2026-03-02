@@ -5,6 +5,13 @@ from dotenv import load_dotenv
 import paho.mqtt.client as mqtt
 from datetime import datetime
 from pymodbus.client import ModbusTcpClient
+import asyncio
+import logging
+
+from sunnybeamtool.sunnybeamtool import SunnyBeam
+
+logging.basicConfig()
+logging.getLogger().setLevel(logging.INFO)
 
 # --- LADE KONFIGURATION ---
 load_dotenv() # Liest die .env Datei ein
@@ -27,7 +34,7 @@ WATT_SIMULATION = 550.5 # Dein simulierter Zählerwert (Watt)
 MQTT_BROKER = os.getenv("MQTT_BROKER")
 MQTT_USER   = os.getenv("MQTT_USER")
 MQTT_PW     = os.getenv("MQTT_PW")
-MQTT_TOPIC  = "PV/Wirkleistung"
+MQTT_TOPIC  = "PV/SunnyBeam/"
 print(f"MQTT-Topic:{MQTT_TOPIC}")
 
 # --- INITIALISIERUNG ---
@@ -43,6 +50,11 @@ if MODBUS_AKTIV:
     client_mb = ModbusTcpClient(FRONIUS_IP, port=FRONIUS_PORT)
 
 try:
+    s_beam = SunnyBeam()
+    sleep(2)
+    data = await s_beam.get_measurements()
+    print("get_measurements:", data)
+    
     if MQTT_AKTIV:
         print(f"connecting to {MQTT_BROKER} ")
         client_mqtt.connect(MQTT_BROKER, 1883)
@@ -59,10 +71,15 @@ try:
         jetzt = datetime.now().strftime("%H:%M:%S")
         status_msg = f"[{jetzt}] "
 
+        # SunnyBeam auslesen
+        data = await s_beam.get_measurements()
+        
+        
+
         # 1. MQTT Senden
         if MQTT_AKTIV:
-            client_mqtt.publish(MQTT_TOPIC, jetzt)
-            status_msg += "MQTT Zeit gesendet. "
+            client_mqtt.publish(MQTT_TOPIC + "power" , data.power)
+            status_msg += "mqtt-power gesendet. "
 
         # 2. Modbus Senden (Fronius Float32)
         if MODBUS_AKTIV and client_mb.connected:
