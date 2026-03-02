@@ -19,7 +19,7 @@ load_dotenv() # Liest die .env Datei ein
 # --- KONFIGURATION ---
 MQTT_AKTIV   = True
 MODBUS_AKTIV = True
-INTERVALL    = 5
+INTERVALL    = 10
 
 # Fronius GEN24 Spezial-Einstellungen
 FRONIUS_IP      = os.getenv("FRONIUS_IP")
@@ -50,7 +50,7 @@ if MQTT_AKTIV:
     client_mqtt.username_pw_set(MQTT_USER, MQTT_PW)
 
 if MODBUS_AKTIV:
-    logging.info("connecting to Fronius ...") 
+    logging.info("connecting to Fronius ({FRONIUS_IP}}:{FRONIUS_PORT}) ...") 
     client_mb = ModbusTcpClient(FRONIUS_IP, port=FRONIUS_PORT)
     logging.debug("after connecting to Fronius1") 
 
