@@ -90,8 +90,8 @@ class SunnyBeam:
             _LOGGER.debug("e-total: %f kWh", energy_total)
             return {
                 "power": round(power / 1000.0, 3),
-                "energy_today": energy_today,
-                "energy_total": energy_total,
+                "energy_today": round(energy_today,3),
+                "energy_total": round(energy_total,3),
             }
         except ConnectionError as err:
             self._connected = False
