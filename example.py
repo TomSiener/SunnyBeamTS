@@ -6,7 +6,7 @@ import logging
 from sunnybeamtool.sunnybeamtool import SunnyBeam
 
 logging.basicConfig()
-logging.getLogger().setLevel(logging.DEBUG)
+logging.getLogger().setLevel(logging.INFO)
 
 
 async def main():
@@ -25,14 +25,14 @@ async def main():
 
             logging.debug("example get_measurements")
             data = await s_beam.get_measurements()
-            print(data)
+            print("get_measurements:", data)
             
             logging.debug("example get_manufacturer")
             data = await s_beam.get_today_measurements()
-            # print(data)
+            print("get_today_measurements:", data)
 
             data = await s_beam.get_last_month_measurements()
-            # print(data)
+            print("get_last_month_measurements:", data)
 
         except ConnectionError as e:
             print(str(e))
