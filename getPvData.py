@@ -11,7 +11,7 @@ import logging
 from sunnybeamtool.sunnybeamtool import SunnyBeam
 
 logging.basicConfig()
-logging.getLogger().setLevel(logging.DEBUG)
+logging.getLogger().setLevel(logging.INFO)
 
 # --- LADE KONFIGURATION ---
 load_dotenv() # Liest die .env Datei ein
@@ -51,8 +51,6 @@ if MODBUS_AKTIV:
     client_mb = ModbusTcpClient(FRONIUS_IP, port=FRONIUS_PORT)
     logging.debug("after connecting to Fronius1") 
 
-logging.debug("after connecting to Fronius2") 
-
 async def main():
     try:
         logging.info("connecting to SunnyBeam ...") 
@@ -83,7 +81,7 @@ async def main():
     
             # 1. MQTT Senden
             if MQTT_AKTIV:
-                client_mqtt.publish(MQTT_TOPIC + "power" , data.power)
+                client_mqtt.publish(MQTT_TOPIC + "power" , data.get("power"))
                 status_msg += "mqtt-power gesendet. "
     
             # 2. Modbus Senden (Fronius Float32)
