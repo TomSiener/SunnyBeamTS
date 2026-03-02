@@ -112,3 +112,9 @@ async def main():
             client_mqtt.disconnect()
         if client_mb:
             client_mb.close()
+
+if __name__ == "__main__":
+
+    loop = asyncio.new_event_loop()
+    loop.create_task(main())
+    loop.run_forever()
