@@ -75,7 +75,7 @@ async def main():
                 print("❌ Modbus Verbindung zu Fronius fehlgeschlagen")
 
         while True:
-            jetzt = datetime.now().strftime("%H:%M:%S")
+            jetzt = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
             status_msg = f"[{jetzt}] "
 
             # SunnyBeam auslesen
@@ -92,6 +92,7 @@ async def main():
                 client_mqtt.publish(MQTT_TOPIC + "power" , data.get("power"))
                 client_mqtt.publish(MQTT_TOPIC + "energy_today" , data.get("energy_today"))
                 client_mqtt.publish(MQTT_TOPIC + "energy_total" , data.get("energy_total")+ENERGY_TOTAL_KORR)
+                client_mqtt.publish(MQTT_TOPIC + "update_time" , jetzt)
                 status_msg += "MQTT-Werte gesendet. "
     
             # 2. Modbus Senden (Fronius Float32)
