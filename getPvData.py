@@ -84,7 +84,8 @@ async def main():
                 print(data)            
             except Exception as err:
                 print(f"Unexpected {err=}, {type(err)=}")
-                wait asyncio.sleep(10)
+                wait asyncio.sleep(60)
+                continue
     
             # 1. MQTT Senden
             if MQTT_AKTIV:
