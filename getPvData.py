@@ -79,8 +79,12 @@ async def main():
             status_msg = f"[{jetzt}] "
 
             # SunnyBeam auslesen
-            data = await s_beam.get_measurements()
-            print(data)            
+            try:
+                data = await s_beam.get_measurements()
+                print(data)            
+            except Exception as err:
+                print(f"Unexpected {err=}, {type(err)=}")
+                wait asyncio.sleep(10)
     
             # 1. MQTT Senden
             if MQTT_AKTIV:
