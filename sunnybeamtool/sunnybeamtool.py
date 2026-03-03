@@ -89,7 +89,7 @@ class SunnyBeam:
             _LOGGER.debug("e-today: %f kWh", energy_today)
             _LOGGER.debug("e-total: %f kWh", energy_total)
             return {
-                "power": round(power / 1000.0, 3),
+                "power": round(power, 3),
                 "energy_today": round(energy_today,3),
                 "energy_total": round(energy_total,3),
             }
