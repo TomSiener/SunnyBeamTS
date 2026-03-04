@@ -13,4 +13,4 @@ echo "activate python env" 2>&1 | tee $LOGFILE
 source /home/tom/.env/bin/activate 2>&1 | tee $LOGFILE
 
 echo "run getPvData" 2>&1 | tee $LOGFILE
-python ./getPvData.py  2>&1 | tee $LOGFILE
+python3 ./getPvData.py  2>&1 | tee $LOGFILE
