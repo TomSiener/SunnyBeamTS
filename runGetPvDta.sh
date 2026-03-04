@@ -13,4 +13,3 @@ source /home/tom/.env/bin/activate #1>> "$LOGFILE" 2> >(tee -a "$LOGFILE" > "$ER
 
 echo "run getPvData" 1>> "$LOGFILE" 2> >(tee -a "$LOGFILE" > "$ERRFILE")
 python ./getPvData.py #1>> "$LOGFILE" 2> >(tee -a "$LOGFILE" > "$ERRFILE")
-
