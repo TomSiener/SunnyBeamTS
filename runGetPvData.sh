@@ -3,7 +3,8 @@
 # Zeitstempel im Format: JAHR-MONAT-TAG_STUNDE-MINUTE-SEKUNDE
 TIMESTAMP=$(date +"%Y%m%d-%H-%M-%S")
 LOGFILE="getPvData_${TIMESTAMP}.log"
-ERRFILE="getPvData_err_${TIMESTAMP}.log"
+#ERRFILE="getPvData_err_${TIMESTAMP}.log"
+echo "Logfile: $(LOGFILE)"
 
 cd /home/tom/SunnyBeamTS
 
