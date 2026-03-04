@@ -2,15 +2,14 @@
 
 # Zeitstempel im Format: JAHR-MONAT-TAG_STUNDE-MINUTE-SEKUNDE
 TIMESTAMP=$(date +"%Y%m%d-%H-%M-%S")
-echo "${TIMESTAMP}"
 LOGFILE="getPvData_${TIMESTAMP}.log"
 ERRFILE="getPvData_err_${TIMESTAMP}.log"
 
 cd /home/tom/SunnyBeamTS
 
 #  stdout in LOGFILE und stderr in beide files
-echo "activate python env" 1>> "$LOGFILE" 2> >(tee -a "$LOGFILE" > "$ERRFILE")
-source /home/tom/.env/bin/activate 1>> "$LOGFILE" 2> >(tee -a "$LOGFILE" > "$ERRFILE")
+echo "activate python env" 2>&1 | tee $LOGFILE
+source /home/tom/.env/bin/activate 2>&1 | tee $LOGFILE
 
-echo "run getPvData" 1>> "$LOGFILE" 2> >(tee -a "$LOGFILE" > "$ERRFILE")
-python ./getPvData.py 1>> "$LOGFILE" 2> >(tee -a "$LOGFILE" > "$ERRFILE")
+echo "run getPvData" 2>&1 | tee $LOGFILE
+python ./getPvData.py  2>&1 | tee $LOGFILE
