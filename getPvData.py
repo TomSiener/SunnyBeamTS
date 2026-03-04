@@ -18,7 +18,7 @@ load_dotenv() # Liest die .env Datei ein
 
 # --- KONFIGURATION ---
 MQTT_AKTIV   = True
-MODBUS_AKTIV = True
+MODBUS_AKTIV = False
 INTERVALL    = 10
 
 # Fronius GEN24 Spezial-Einstellungen
