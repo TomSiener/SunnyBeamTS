@@ -13,7 +13,7 @@ from sunnybeamtool.sunnybeamtool import SunnyBeam
 
 _LOGGER = Logger.with_default_handlers()
 #_LOGGER.basicConfig()
-_LOGGER.getLogger().setLevel(logging.INFO)
+#_LOGGER.getLogger().setLevel(logging.INFO)
 
 # --- LADE KONFIGURATION ---
 load_dotenv() # Liest die .env Datei ein
