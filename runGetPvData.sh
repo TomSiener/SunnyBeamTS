@@ -8,10 +8,13 @@ echo "Logfile $LOGFILE"
 
 cd /home/tom/SunnyBeamTS
 
-#  stdout in LOGFILE und stderr in beide files
+#stdout und stderr in LOGFILE und console
 echo "activate python env" 2>&1 | tee $LOGFILE
+
+#source funktioniert mit redirect nicht mehr
 source /home/tom/.env/bin/activate #2>&1 | tee $LOGFILE
 pip -V
 
 echo "run getPvData" 2>&1 | tee $LOGFILE
 python3 ./getPvData.py  2>&1 | tee $LOGFILE
+echo "after getPvData" 2>&1 | tee $LOGFILE
