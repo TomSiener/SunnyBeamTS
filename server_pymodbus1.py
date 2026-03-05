@@ -54,7 +54,7 @@ from pymodbus.server import (
     #ModbusSocketFramer,
     #ModbusTlsFramer,
 #)
-from pymodbus.version import version
+#from pymodbus.version import version
 
 
 def setup_sync_server(args):
