@@ -6,14 +6,14 @@ import paho.mqtt.client as mqtt
 from datetime import datetime
 from pymodbus.client import ModbusTcpClient
 import asyncio
-#import logging
-from aiologger import Logger
+import logging
+from aiologger import Logger as asyncLogger
 
 from sunnybeamtool.sunnybeamtool import SunnyBeam
 
-_LOGGER = Logger.with_default_handlers()
-#_LOGGER.basicConfig()
-#_LOGGER.getLogger().setLevel(logging.INFO)
+
+_LOGGER.basicConfig()
+_LOGGER.getLogger().setLevel(logging.INFO)
 
 # --- LADE KONFIGURATION ---
 load_dotenv() # Liest die .env Datei ein
@@ -58,6 +58,7 @@ if MODBUS_AKTIV:
 
 async def main():
     try:
+        _LOGGER = asyncLogger.with_default_handlers()
         _LOGGER.info("connecting to SunnyBeam ...") 
         s_beam = SunnyBeam()
         await asyncio.sleep(2)
@@ -123,6 +124,7 @@ async def main():
             client_mqtt.disconnect()
         if client_mb:
             client_mb.close()
+        await _LOGGER.shutdown()
 
 if __name__ == "__main__":
     loop = asyncio.new_event_loop()
