@@ -292,7 +292,7 @@ class SunnyBeam:
                 new_crc.append(value)
         msg[-3:-1] = new_crc
 
-        _LOGGER.debug("Sent: %s", msg.hex())
+        _LOGGER.debug("Sent: %s" % &msg.hex()))
         await asyncio.sleep(0.2)
 
         try:
