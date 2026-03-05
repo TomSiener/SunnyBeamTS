@@ -32,9 +32,9 @@ import os
 import logging
 import pymodbus
 
+from pymodbus import ModbusDeviceContext
 from pymodbus.datastore import (
-    ModbusSequentialDataBlock,
-	ModbusDeviceContext,
+    ModbusSequentialDataBlock,	
     ModbusServerContext,    
     ModbusSparseDataBlock,
 )
