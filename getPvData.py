@@ -47,14 +47,14 @@ client_mb   = None
 
 if MQTT_AKTIV:
     # Pflicht für Paho 2.1: CallbackAPIVersion angeben
-    _LOGGER.info("connecting to MQTT ...") 
+    logging.info("connecting to MQTT ...") 
     client_mqtt = mqtt.Client(mqtt.CallbackAPIVersion.VERSION2)
     client_mqtt.username_pw_set(MQTT_USER, MQTT_PW)
 
 if MODBUS_AKTIV:
-    _LOGGER.info("connecting to Fronius ({FRONIUS_IP}}:{FRONIUS_PORT}) ...") 
+    logging.info("connecting to Fronius ({FRONIUS_IP}}:{FRONIUS_PORT}) ...") 
     client_mb = ModbusTcpClient(FRONIUS_IP, port=FRONIUS_PORT)
-    _LOGGER.debug("after connecting to Fronius1") 
+    logging.debug("after connecting to Fronius1") 
 
 async def main():
     try:
