@@ -38,7 +38,7 @@ from pymodbus.datastore import (
     ModbusServerContext,    
     ModbusSparseDataBlock,
 )
-#from pymodbus.device import ModbusDeviceIdentification
+from pymodbus.device import ModbusDeviceIdentification
 
 # --------------------------------------------------------------------------- #
 # import the various client implementations
@@ -48,13 +48,13 @@ from pymodbus.server import (
     StartTlsServer,
     StartUdpServer,
 )
-#from pymodbus.transaction import (
-    #ModbusAsciiFramer,
-    #ModbusBinaryFramer,
-    #ModbusSocketFramer,
-    #ModbusTlsFramer,
-#)
-#from pymodbus.version import version
+from pymodbus.transaction import (
+    ModbusAsciiFramer,
+    ModbusBinaryFramer,
+    ModbusSocketFramer,
+    ModbusTlsFramer,
+)
+from pymodbus.version import version
 
 
 def setup_sync_server(args):
