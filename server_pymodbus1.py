@@ -49,7 +49,7 @@ from pymodbus.server import (
 )
 from pymodbus.transaction import (
     #ModbusAsciiFramer,
-    ModbusBinaryFramer,
+    #ModbusBinaryFramer,
     ModbusSocketFramer,
     ModbusTlsFramer,
 )
