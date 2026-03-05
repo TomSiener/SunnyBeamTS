@@ -29,6 +29,7 @@ import sys
 import socket
 import signal
 import os
+from dotenv import load_dotenv
 
 from pymodbus.server import StartTcpServer
 
@@ -71,15 +72,25 @@ class RepeatedTimer(object):
 ###############################################################
 # Configuration
 ###############################################################
+# --- LADE KONFIGURATION ---
+load_dotenv() # Liest die .env Datei ein
+# MQTT Einstellungen
+MQTT_BROKER = os.getenv("MQTT_BROKER")
+MQTT_USER   = os.getenv("MQTT_USER")
+MQTT_PW     = os.getenv("MQTT_PW")
+MQTT_TOPIC  = "PV/SunnyBeam/"
+MQTT_POWER = MQTT_TOPIC + "power"
+MQTT_TOTAL = MQTT_TOPIC + "energy_total"
+
 mqttconf = {
-            'username':"",
-            'password':"",
-            'address': "",
+            'username':MQTT_USER,
+            'password':MQTT_PW,
+            'address': MQTT_BROKER,
             'port': 1883
 }
-MQTT_TOPIC_CONSUMPTION  = "OpenDTU/ac/power" #OpenDTU Watts
+MQTT_TOPIC_CONSUMPTION  = MQTT_POWER #OpenDTU Watts
 MQTT_TOPIC_TOTAL_IMPORT = "" #Import Wh
-MQTT_TOPIC_TOTAL_EXPORT = "OpenDTU/ac/yieldtotal" #Export WH
+MQTT_TOPIC_TOTAL_EXPORT = MQTT_TOTAL #Export WH
 MQTT_TOPIC_L1_CONSUMPTION = "" # L1 Watts
 MQTT_TOPIC_L2_CONSUMPTION= "" # L2 Watts
 MQTT_TOPIC_L3_CONSUMPTION = "" # L3 Watts, empty -> L1,L2,L3 i                                                                                                             s calculated
