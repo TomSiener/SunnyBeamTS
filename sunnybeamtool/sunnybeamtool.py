@@ -158,7 +158,7 @@ class SunnyBeam:
          #       self._dev.product,
          ##       self._dev.manufacturer,
          #       self._dev.serial_number,
-        )
+         #)
         
         #pdb.set_trace()  #zum debuggen
         
