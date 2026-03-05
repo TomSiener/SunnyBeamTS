@@ -37,7 +37,7 @@ from pymodbus.datastore import (
     ModbusServerContext,    
     ModbusSparseDataBlock,
 )
-from pymodbus.device import ModbusDeviceIdentification
+#from pymodbus.device import ModbusDeviceIdentification
 
 # --------------------------------------------------------------------------- #
 # import the various client implementations
