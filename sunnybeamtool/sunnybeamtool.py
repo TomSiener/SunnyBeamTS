@@ -153,7 +153,7 @@ class SunnyBeam:
         await loop.run_in_executor(None, dev.set_configuration)
         self._dev = dev
         _LOGGER.info(
-            "Connected to %s from %s with serial number %s",
+            f"Connected to %s from %s with serial number %s",
             self._dev.product,
             self._dev.manufacturer,
             self._dev.serial_number,
