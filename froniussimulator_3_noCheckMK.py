@@ -140,7 +140,7 @@ def isfloat(num):
 
 def init_mqtt():
     mqttc = mqtt.Client(mqtt.CallbackAPIVersion.VERSION1,"SmartMeter",clean_session=False)
-    #mqttc.username_pw_set(mqttconf['username'], mqttconf['password'])
+    mqttc.username_pw_set(mqttconf['username'], mqttconf['password'])
     mqttc.connect(mqttconf['address'], mqttconf['port'], 60)
 
     mqttc.subscribe(MQTT_TOPIC_CONSUMPTION)
