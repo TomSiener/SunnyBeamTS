@@ -89,9 +89,9 @@ class SunnyBeam:
             energy_today = round(struct.unpack("f", buf[29:33])[0], 3)
             energy_total = round(struct.unpack("f", buf[33:37])[0], 3)
 
-            _LOGGER.debug("pac: %d W", power)
-            _LOGGER.debug("e-today: %f kWh", energy_today)
-            _LOGGER.debug("e-total: %f kWh", energy_total)
+            _LOGGER.debug("pac: %d W" % (power))
+            _LOGGER.debug("e-today: %f kWh" % /energy_today))
+            _LOGGER.debug("e-total: %f kWh" % (energy_total))
             return {
                 "power": round(power, 3),
                 "energy_today": round(energy_today,3),
@@ -239,7 +239,7 @@ class SunnyBeam:
         data = []
         for i in range(5, len(rawdata), 12):
             part_buf = rawdata[i : i + 12]
-            _LOGGER.debug("day: %s", part_buf.hex())
+            _LOGGER.debug("day: %s" % (part_buf.hex()))
 
             if len(part_buf) != 12:
                 return None
@@ -339,7 +339,7 @@ class SunnyBeam:
             except core.USBError as err:
                 raise ConnectionError("Could not read form device") from err
             buf_in = bytearray(raw_response.tobytes())
-            _LOGGER.debug("raw_read: %s", buf_in.hex())
+            _LOGGER.debug("raw_read: %s" % (buf_in.hex()))
 
             # Process payload if available
             if len(buf_in) > 2:
@@ -379,7 +379,7 @@ class SunnyBeam:
                 if end_found:
                     break  # stop iterations
 
-        _LOGGER.debug("raw_read processed: %s", buf_out.hex())
+        _LOGGER.debug("raw_read processed: %s" % (buf_out.hex()))
 
         # Check CRC
         if len(buf_out) > 2:
@@ -389,9 +389,9 @@ class SunnyBeam:
             msg_crc = buf_out[-3:-1]
             if crc != msg_crc:
                 _LOGGER.warning(
-                    "Read bad crc %s, should be %s. Message *should* be rejected",
-                    msg_crc.hex(),
-                    crc.hex(),
+                    "Read bad crc %s, should be %s. Message *should* be rejected" %
+                    (msg_crc.hex(),
+                    crc.hex(),)
                 )
         return buf_out
 
