@@ -90,7 +90,7 @@ class SunnyBeam:
             energy_total = round(struct.unpack("f", buf[33:37])[0], 3)
 
             _LOGGER.debug("pac: %d W" % (power))
-            _LOGGER.debug("e-today: %f kWh" % /energy_today))
+            _LOGGER.debug("e-today: %f kWh" % (energy_today))
             _LOGGER.debug("e-total: %f kWh" % (energy_total))
             return {
                 "power": round(power, 3),
