@@ -31,9 +31,9 @@ import argparse
 import os
 import logging
 
-from pymodbus import ModbusSlaveContext
 from pymodbus.datastore import (
     ModbusSequentialDataBlock,
+	ModbusDeviceContext,
     ModbusServerContext,    
     ModbusSparseDataBlock,
 )
