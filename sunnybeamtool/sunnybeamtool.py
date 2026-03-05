@@ -71,8 +71,6 @@ class SunnyBeam:
         Returns:
             dict[str, any]: Returns power, energy_today and energy_total measurements in a dict
         """
-        name="Thomas"
-        _LOGGER.info("Hello, %s!" % (name,))
         _LOGGER.debug("before _connect")
         await self._connect()
         _LOGGER.debug("after _connect")
