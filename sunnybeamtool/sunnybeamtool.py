@@ -10,7 +10,7 @@ from usb import core, util
 
 import pdb  #zum debuggen
 
-_LOGGER = logging.getLogger(__name__)
+#_LOGGER = logging.getLogger(__name__)
 _LOGGER = Logger.with_default_handlers()
 
 from .const import (
