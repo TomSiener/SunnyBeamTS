@@ -50,7 +50,7 @@ from pymodbus.server import (
 from pymodbus.transaction import (
     #ModbusAsciiFramer,
     #ModbusBinaryFramer,
-    ModbusSocketFramer,
+    #ModbusSocketFramer,
     ModbusTlsFramer,
 )
 from pymodbus.version import version
