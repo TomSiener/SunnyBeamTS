@@ -16,6 +16,7 @@ source /home/tom/.env/bin/activate #2>&1 | tee $LOGFILE
 pip -V
 
 echo "run server_pymodbus1.py" 2>&1 | tee $LOGFILE
-python3 ./server_pymodbus1.py --comm tcp --port 502
+python3 ./froniussimulator_3_noCheckMK.py
+#python3 ./server_pymodbus1.py --comm tcp --port 502
 #2>&1 | tee $LOGFILE
 echo "after server_pymodbus1.py" 2>&1 | tee $LOGFILE
