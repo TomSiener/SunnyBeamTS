@@ -12,7 +12,7 @@ from aiologger import Logger
 from sunnybeamtool.sunnybeamtool import SunnyBeam
 
 _LOGGER = Logger.with_default_handlers()
-_LOGGER.basicConfig()
+#_LOGGER.basicConfig()
 _LOGGER.getLogger().setLevel(logging.INFO)
 
 # --- LADE KONFIGURATION ---
