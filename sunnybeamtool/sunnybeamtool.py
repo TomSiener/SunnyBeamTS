@@ -1,7 +1,8 @@
 """Sunnybeam main class"""
 
 import asyncio
-import logging
+#import logging
+from aiologger import Logger
 import struct
 from datetime import datetime
 import crcmod
@@ -10,6 +11,7 @@ from usb import core, util
 import pdb  #zum debuggen
 
 _LOGGER = logging.getLogger(__name__)
+_LOGGER = Logger.with_default_handlers()
 
 from .const import (
     BASIC_MSG,
