@@ -58,7 +58,8 @@ if MODBUS_AKTIV:
 
 async def main():
     try:
-        _LOGGER = asyncLogger.with_default_handlers(level=logging.INFO, format="%(message)s")        
+        _LOGGER = asyncLogger.with_default_handlers()        
+        _LOGGER.setLevel(logging.INFO)
         _LOGGER.info("connecting to SunnyBeam ...") 
         s_beam = SunnyBeam()
         await asyncio.sleep(2)
