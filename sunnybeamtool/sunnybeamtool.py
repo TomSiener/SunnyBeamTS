@@ -12,7 +12,7 @@ import pdb  #zum debuggen
 
 #_LOGGER = logging.getLogger(__name__)
 _LOGGER = Logger.with_default_handlers()
-_LOGGER.setLevel(logging.INFO)
+
 
 from .const import (
     BASIC_MSG,
