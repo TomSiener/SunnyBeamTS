@@ -6,12 +6,14 @@ import paho.mqtt.client as mqtt
 from datetime import datetime
 from pymodbus.client import ModbusTcpClient
 import asyncio
-import logging
+#import logging
+from aiologger import Logger
 
 from sunnybeamtool.sunnybeamtool import SunnyBeam
 
-logging.basicConfig()
-logging.getLogger().setLevel(logging.INFO)
+_LOGGER = Logger.with_default_handlers()
+_LOGGER.basicConfig()
+_LOGGER.getLogger().setLevel(logging.INFO)
 
 # --- LADE KONFIGURATION ---
 load_dotenv() # Liest die .env Datei ein
@@ -45,34 +47,34 @@ client_mb   = None
 
 if MQTT_AKTIV:
     # Pflicht für Paho 2.1: CallbackAPIVersion angeben
-    logging.info("connecting to MQTT ...") 
+    _LOGGER.info("connecting to MQTT ...") 
     client_mqtt = mqtt.Client(mqtt.CallbackAPIVersion.VERSION2)
     client_mqtt.username_pw_set(MQTT_USER, MQTT_PW)
 
 if MODBUS_AKTIV:
-    logging.info("connecting to Fronius ({FRONIUS_IP}}:{FRONIUS_PORT}) ...") 
+    _LOGGER.info("connecting to Fronius ({FRONIUS_IP}}:{FRONIUS_PORT}) ...") 
     client_mb = ModbusTcpClient(FRONIUS_IP, port=FRONIUS_PORT)
-    logging.debug("after connecting to Fronius1") 
+    _LOGGER.debug("after connecting to Fronius1") 
 
 async def main():
     try:
-        logging.info("connecting to SunnyBeam ...") 
+        _LOGGER.info("connecting to SunnyBeam ...") 
         s_beam = SunnyBeam()
         await asyncio.sleep(2)
         data = await s_beam.get_measurements()
-        print("get_measurements:", data)
+        _LOGGER.info("get_measurements:", data)
     
         if MQTT_AKTIV:
-            print(f"connecting to {MQTT_BROKER} ")
+            _LOGGER.info(f"connecting to {MQTT_BROKER} ")
             client_mqtt.connect(MQTT_BROKER, 1883)
             client_mqtt.loop_start()
-            print("✅ MQTT 2.1 verbunden")
+            _LOGGER.info("✅ MQTT 2.1 verbunden")
 
         if MODBUS_AKTIV:
             if client_mb.connect():
-                print(f"✅ Modbus verbunden (Fronius ID {SMART_METER_ID})")
+                _LOGGER.info(f"✅ Modbus verbunden (Fronius ID {SMART_METER_ID})")
             else:
-                print("❌ Modbus Verbindung zu Fronius fehlgeschlagen")
+                _LOGGER.warning("❌ Modbus Verbindung zu Fronius fehlgeschlagen")
 
         while True:
             jetzt = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
@@ -81,9 +83,9 @@ async def main():
             # SunnyBeam auslesen
             try:
                 data = await s_beam.get_measurements()
-                print(data)            
+                _LOGGER.info(data)            
             except Exception as err:
-                print(f"Unexpected {err=}, {type(err)=}")
+                _LOGGER.warning(f"Unexpected {err=}, {type(err)=}")
                 await asyncio.sleep(60)
                 continue
     
@@ -110,11 +112,11 @@ async def main():
                 else:
                     status_msg += f"Modbus FEHLER: {res}"
 
-            print(status_msg)
+            _LOGGER.info(status_msg)
             await asyncio.sleep(INTERVALL)
 
     except KeyboardInterrupt:
-        print("\nBeendet.")
+        _LOGGER.info("\nBeendet.")
     finally:
         if client_mqtt:
             client_mqtt.loop_stop()
@@ -123,7 +125,6 @@ async def main():
             client_mb.close()
 
 if __name__ == "__main__":
-
     loop = asyncio.new_event_loop()
     loop.create_task(main())
     loop.run_forever()
