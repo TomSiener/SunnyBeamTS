@@ -12,8 +12,8 @@ from aiologger import Logger as asyncLogger
 from sunnybeamtool.sunnybeamtool import SunnyBeam
 
 
-_LOGGER.basicConfig()
-_LOGGER.getLogger().setLevel(logging.INFO)
+logging.basicConfig()
+logging.getLogger().setLevel(logging.INFO)
 
 # --- LADE KONFIGURATION ---
 load_dotenv() # Liest die .env Datei ein
