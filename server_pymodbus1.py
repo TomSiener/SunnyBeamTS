@@ -32,10 +32,10 @@ import os
 import logging
 import pymodbus
 
-from pymodbus import ModbusDeviceContext
 from pymodbus.datastore import (
     ModbusSequentialDataBlock,	
     ModbusServerContext,    
+	ModbusSlaveContext,
     ModbusSparseDataBlock,
 )
 from pymodbus.device import ModbusDeviceIdentification
