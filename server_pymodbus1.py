@@ -48,7 +48,7 @@ from pymodbus.server import (
     StartUdpServer,
 )
 from pymodbus.transaction import (
-    ModbusAsciiFramer,
+    #ModbusAsciiFramer,
     ModbusBinaryFramer,
     ModbusSocketFramer,
     ModbusTlsFramer,
