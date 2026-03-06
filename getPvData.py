@@ -20,6 +20,7 @@ load_dotenv() # Liest die .env Datei ein
 
 # --- KONFIGURATION ---
 MQTT_AKTIV   = True
+MQTT_LOCAL_AKTIV   = True
 MODBUS_AKTIV = False
 INTERVALL    = 10
 
@@ -38,16 +39,24 @@ MQTT_USER   = os.getenv("MQTT_USER")
 MQTT_PW     = os.getenv("MQTT_PW")
 MQTT_TOPIC  = "PV/SunnyBeam/"
 
+
 #Korrektur des TotalWerts damit es keinen Spring gibt von 0 auf 43000
 ENERGY_TOTAL_KORR = -43800
 
 # --- INITIALISIERUNG ---
 client_mqtt = None
+client_mqtt_local = None
 client_mb   = None
+
+if MQTT_LOCAL_AKTIV:
+    # Pflicht für Paho 2.1: CallbackAPIVersion angeben
+    logging.info("connecting to local MQTT ...") 
+    client_mqtt_local = mqtt.Client(mqtt.CallbackAPIVersion.VERSION2)
+    #client_mqtt_local.username_pw_set(MQTT_USER, MQTT_PW)
 
 if MQTT_AKTIV:
     # Pflicht für Paho 2.1: CallbackAPIVersion angeben
-    logging.info("connecting to MQTT ...") 
+    logging.info("connecting to HASS MQTT ...") 
     client_mqtt = mqtt.Client(mqtt.CallbackAPIVersion.VERSION2)
     client_mqtt.username_pw_set(MQTT_USER, MQTT_PW)
 
@@ -69,8 +78,14 @@ async def main():
             _LOGGER.info(f"connecting to {MQTT_BROKER} ")
             client_mqtt.connect(MQTT_BROKER, 1883)
             client_mqtt.loop_start()
-            _LOGGER.info("✅ MQTT 2.1 verbunden")
+            _LOGGER.info("✅ HASS MQTT 2.1 verbunden")
 
+        if MQTT_LOCAL_AKTIV:
+            _LOGGER.info(f"connecting to local MQTT_BROKER ")
+            client_mqtt_local.connect("localhost", 1883)
+            client_mqtt_local.loop_start()
+            _LOGGER.info("✅ local MQTT 2.1 verbunden")
+        
         if MODBUS_AKTIV:
             if client_mb.connect():
                 _LOGGER.info(f"✅ Modbus verbunden (Fronius ID {SMART_METER_ID})")
@@ -96,8 +111,15 @@ async def main():
                 client_mqtt.publish(MQTT_TOPIC + "energy_today" , data.get("energy_today"))
                 client_mqtt.publish(MQTT_TOPIC + "energy_total" , data.get("energy_total")+ENERGY_TOTAL_KORR)
                 client_mqtt.publish(MQTT_TOPIC + "update_time" , jetzt)
-                status_msg += "MQTT-Werte gesendet. "
-    
+                status_msg += "HASS MQTT-Werte gesendet. "
+
+            if MQTT_AKTIV:
+                client_mqtt_local.publish(MQTT_TOPIC + "power" , data.get("power"))
+                client_mqtt_local.publish(MQTT_TOPIC + "energy_today" , data.get("energy_today"))
+                client_mqtt_local.publish(MQTT_TOPIC + "energy_total" , data.get("energy_total")+ENERGY_TOTAL_KORR)
+                client_mqtt_local.publish(MQTT_TOPIC + "update_time" , jetzt)
+                status_msg += "local MQTT-Werte gesendet. "
+
             # 2. Modbus Senden (Fronius Float32)
             if MODBUS_AKTIV and client_mb.connected:
                 # Fronius erwartet Big Endian für Bytes und Words
