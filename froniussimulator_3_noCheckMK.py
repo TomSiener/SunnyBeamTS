@@ -43,6 +43,19 @@ from pymodbus.transaction import (
     ModbusTlsFramer,
 )
 
+# Source - https://stackoverflow.com/a/59659455
+# Posted by Benyamin Jafari
+# Retrieved 2026-03-06, License - CC BY-SA 4.0
+
+#Logging
+import logging
+FORMAT = ('%(asctime)-15s %(threadName)-15s'
+          ' %(levelname)-8s %(module)-15s:%(lineno)-8s %(message)s')
+logging.basicConfig(format=FORMAT)
+log = logging.getLogger()
+log.setLevel(logging.DEBUG)
+
+
 ###############################################################
 # Timer Class
 ###############################################################
