@@ -7,11 +7,14 @@ Simulates a Fronius Smart Meter for providing necessary
 information to inverters (e.g. Gen24).
 Can be used with OpenDTU.
 Necessary information is provied via MQTT and translated to MODBUS TCP
-
 Based on
 https://www.photovoltaikforum.com/thread/185108-fronius-smart-meter-tcp-protokoll
-
+--------------------------------
+TS:
+Config-Werte aus .env
+local mqtt
 """
+
 ###############################################################
 # Import Libs
 ###############################################################
@@ -75,9 +78,9 @@ class RepeatedTimer(object):
 # --- LADE KONFIGURATION ---
 load_dotenv() # Liest die .env Datei ein
 # MQTT Einstellungen
-MQTT_BROKER = os.getenv("MQTT_BROKER")
-MQTT_USER   = os.getenv("MQTT_USER")
-MQTT_PW     = os.getenv("MQTT_PW")
+MQTT_BROKER = "localhost" #os.getenv("MQTT_BROKER")
+#MQTT_USER   = os.getenv("MQTT_USER")
+#MQTT_PW     = os.getenv("MQTT_PW")
 MQTT_TOPIC  = "PV/SunnyBeam/"
 MQTT_POWER = MQTT_TOPIC + "power"
 MQTT_TOTAL = MQTT_TOPIC + "energy_total"
@@ -140,7 +143,7 @@ def isfloat(num):
 
 def init_mqtt():
     mqttc = mqtt.Client(mqtt.CallbackAPIVersion.VERSION1,"SmartMeter",clean_session=False)
-    mqttc.username_pw_set(mqttconf['username'], mqttconf['password'])
+    #mqttc.username_pw_set(mqttconf['username'], mqttconf['password'])
     mqttc.connect(mqttconf['address'], mqttconf['port'], 60)
 
     mqttc.subscribe(MQTT_TOPIC_CONSUMPTION)
