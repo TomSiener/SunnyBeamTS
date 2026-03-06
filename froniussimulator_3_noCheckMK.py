@@ -79,8 +79,8 @@ class RepeatedTimer(object):
 load_dotenv() # Liest die .env Datei ein
 # MQTT Einstellungen
 MQTT_BROKER = "localhost" #os.getenv("MQTT_BROKER")
-#MQTT_USER   = os.getenv("MQTT_USER")
-#MQTT_PW     = os.getenv("MQTT_PW")
+MQTT_USER   = os.getenv("MQTT_USER")
+MQTT_PW     = os.getenv("MQTT_PW")
 MQTT_TOPIC  = "PV/SunnyBeam/"
 MQTT_POWER = MQTT_TOPIC + "power"
 MQTT_TOTAL = MQTT_TOPIC + "energy_total"
