@@ -143,7 +143,7 @@ async def main():
                     status_msg += f"Modbus FEHLER: {res}"
 
             _LOGGER.info(status_msg)
-            FIRST_RUN = FALSE
+            FIRST_RUN = False
             await asyncio.sleep(INTERVALL)
 
     except KeyboardInterrupt:
