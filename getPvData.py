@@ -101,7 +101,7 @@ async def main():
             # SunnyBeam auslesen
             try:
                 data = await s_beam.get_measurements()
-                if FIRST_RUN
+                if FIRST_RUN:
                     _LOGGER.info(data)                                
                 else
                     _LOGGER.DEBUG(data)            
