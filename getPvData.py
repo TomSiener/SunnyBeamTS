@@ -146,7 +146,7 @@ async def main():
 
             LAST_TIME = NOW_TIME
             NOW_TIME = datetime.now().minute
-            if NOW_TIME != LAST_TIME     # Statusnachricht nur alle Minute
+            if NOW_TIME != LAST_TIME:    # Statusnachricht nur alle Minute
                  status_msg += f" {data}"
                 _LOGGER.info(status_msg)
             FIRST_RUN = False
