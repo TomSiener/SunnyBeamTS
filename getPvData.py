@@ -142,6 +142,7 @@ async def main():
                 else:
                     status_msg += f"Modbus FEHLER: {res}"
 
+            
             _LOGGER.info(status_msg)
             FIRST_RUN = False
             await asyncio.sleep(INTERVALL)
