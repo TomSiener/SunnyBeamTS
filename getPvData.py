@@ -21,7 +21,7 @@ load_dotenv() # Liest die .env Datei ein
 # --- KONFIGURATION ---
 MQTT_AKTIV   = True
 MQTT_LOCAL_AKTIV   = True
-MODBUS_AKTIV = False
+MODBUS_AKTIV = False    # funktionirtz nicht, es wird ein TCP Server benötigt
 INTERVALL    = 10
 
 # Fronius GEN24 Spezial-Einstellungen
@@ -69,6 +69,8 @@ if MODBUS_AKTIV:
 
 async def main():
     global FIRST_RUN 
+    LAST_TIME = -1
+    NOW_TIME = -1
     try:
         _LOGGER = asyncLogger.with_default_handlers(level=logging.INFO)                
         _LOGGER.info("connecting to SunnyBeam ...") 
@@ -142,8 +144,11 @@ async def main():
                 else:
                     status_msg += f"Modbus FEHLER: {res}"
 
-            
-            _LOGGER.info(status_msg)
+            LAST_TIME = NOW_TIME
+            NOW_TIME = datetime.now().minute
+            if NOW_TIME <> LAST_TIME     # Statusnachricht nur alle Minute
+                 status_msg += f" {data}"
+                _LOGGER.info(status_msg)
             FIRST_RUN = False
             await asyncio.sleep(INTERVALL)
 
