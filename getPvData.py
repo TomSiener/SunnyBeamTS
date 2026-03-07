@@ -42,6 +42,8 @@ MQTT_TOPIC  = "PV/SunnyBeam/"
 
 #Korrektur des TotalWerts damit es keinen Spring gibt von 0 auf 43000
 ENERGY_TOTAL_KORR = -43800
+# beim ersten Durchlauf mehr loggen
+FIRST_RUN = True 
 
 # --- INITIALISIERUNG ---
 client_mqtt = None
@@ -99,9 +101,13 @@ async def main():
             # SunnyBeam auslesen
             try:
                 data = await s_beam.get_measurements()
-                _LOGGER.info(data)            
+                if FIRST_RUN
+                    _LOGGER.info(data)                                
+                else
+                    _LOGGER.DEBUG(data)            
             except Exception as err:
                 _LOGGER.warning(f"Unexpected {err=}, {type(err)=}")
+                FIRST_RUN = True
                 await asyncio.sleep(60)
                 continue
     
@@ -136,6 +142,7 @@ async def main():
                     status_msg += f"Modbus FEHLER: {res}"
 
             _LOGGER.info(status_msg)
+            FIRST_RUN = FALSE
             await asyncio.sleep(INTERVALL)
 
     except KeyboardInterrupt:
