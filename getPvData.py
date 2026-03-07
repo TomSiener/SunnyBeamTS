@@ -105,7 +105,7 @@ async def main():
                 if FIRST_RUN:
                     _LOGGER.info(data)                                
                 else:
-                    _LOGGER.DEBUG(data)            
+                    _LOGGER.debug(data)            
             except Exception as err:
                 _LOGGER.warning(f"Unexpected {err=}, {type(err)=}")
                 FIRST_RUN = True
