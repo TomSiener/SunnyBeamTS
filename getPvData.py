@@ -103,7 +103,7 @@ async def main():
                 data = await s_beam.get_measurements()
                 if FIRST_RUN:
                     _LOGGER.info(data)                                
-                else
+                else:
                     _LOGGER.DEBUG(data)            
             except Exception as err:
                 _LOGGER.warning(f"Unexpected {err=}, {type(err)=}")
