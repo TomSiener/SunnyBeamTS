@@ -68,6 +68,7 @@ if MODBUS_AKTIV:
     logging.debug("after connecting to Fronius1") 
 
 async def main():
+    global FIRST_RUN 
     try:
         _LOGGER = asyncLogger.with_default_handlers(level=logging.INFO)                
         _LOGGER.info("connecting to SunnyBeam ...") 
