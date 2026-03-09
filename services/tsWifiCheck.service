@@ -4,7 +4,6 @@ After=network-online.target
 Wants=network-online.target
 
 [Service]
-ExecStartPre=/bin/sleep 300
 ExecStart=/bin/bash /home/tom/SunnyBeamTS/wifi_check.sh
 
 [Install]
