@@ -5,7 +5,7 @@ dist/
 sunnybeamtool.egg-info/
 .venv/
 .env
-.log
+*.log
 
 
 __pycache__
