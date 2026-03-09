@@ -1,0 +1,11 @@
+[Unit]
+Description=TS Get SunnyBeam Data
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+ExecStartPre=/bin/sleep 10
+ExecStart=/bin/bash /home/tom/SunnyBeamTS/runGetPvData.sh
+
+[Install]
+WantedBy=multi-user.target
