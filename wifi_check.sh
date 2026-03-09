@@ -1,5 +1,8 @@
 #!/bin/bash
 
+echo "Delay Start for 5 minutes"
+sleep 300
+
 echo "Starting WiFi Check every minute"
 while true ; do
    if ifconfig | grep -q "inet 192." ; then
