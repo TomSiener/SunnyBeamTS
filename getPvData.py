@@ -141,8 +141,8 @@ async def main():
                 client_mqtt.publish(MQTT_TOPIC + "energy_today" , data.get("energy_today"))
                 client_mqtt.publish(MQTT_TOPIC + "energy_total" , data.get("energy_total")+ENERGY_TOTAL_KORR)
                 client_mqtt.publish(MQTT_TOPIC + "update_time" , jetzt)
-                client_mqtt.publish(MQTT_TOPIC + "boot_time" , BOOT_TIME)
-                client_mqtt.publish(MQTT_TOPIC + "uptime" , UPTIME)
+                client_mqtt.publish(MQTT_TOPIC + "boot_time" , str(BOOT_TIME))
+                client_mqtt.publish(MQTT_TOPIC + "uptime" , str(UPTIME))
                 status_msg += "HASS MQTT-Werte gesendet. "
 
             if MQTT_LOCAL_AKTIV:
