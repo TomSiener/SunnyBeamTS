@@ -8,9 +8,9 @@ from pymodbus.client import ModbusTcpClient
 import asyncio
 import logging
 from aiologger import Logger as asyncLogger
+from datetime import timedelta
 
 from sunnybeamtool.sunnybeamtool import SunnyBeam
-
 
 logging.basicConfig()
 logging.getLogger().setLevel(logging.INFO)
@@ -49,6 +49,23 @@ FIRST_RUN = True
 client_mqtt = None
 client_mqtt_local = None
 client_mb   = None
+
+#Boot- und Uptime ermittel n########################
+def get_boot_time():
+    with open('/proc/stat', 'r') as f:
+        for line in f:
+            if line.startswith('btime'):
+              return int(line.split()[1])
+
+BOOT_TIME_INT=get_boot_time()
+BOOT_TIME = datetime.fromtimestamp(BOOT_TIME_INT)
+logging.info(f"BootTime: {BOOT_TIME}")
+
+UPTIME = datetime.now() - BOOT_TIME
+#Millisekunden abschneiden
+UPTIME=timedelta(seconds=int(UPTIME.total_seconds()))
+logging.info(f"Uptime: {UPTIME}")
+################################################
 
 if MQTT_LOCAL_AKTIV:
     # Pflicht für Paho 2.1: CallbackAPIVersion angeben
@@ -100,6 +117,10 @@ async def main():
         while True:
             jetzt = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
             status_msg = f"[{jetzt}] "
+            #Aktuelle UpdaTime aus ermitteln
+            UPTIME = datetime.now() - BOOT_TIME
+            #Millisekunden abschneiden
+            UPTIME=timedelta(seconds=int(UPTIME.total_seconds()))
 
             # SunnyBeam auslesen
             try:
@@ -120,6 +141,8 @@ async def main():
                 client_mqtt.publish(MQTT_TOPIC + "energy_today" , data.get("energy_today"))
                 client_mqtt.publish(MQTT_TOPIC + "energy_total" , data.get("energy_total")+ENERGY_TOTAL_KORR)
                 client_mqtt.publish(MQTT_TOPIC + "update_time" , jetzt)
+                client_mqtt.publish(MQTT_TOPIC + "boot_time" , BOOT_TIME)
+                client_mqtt.publish(MQTT_TOPIC + "uptime" , UPTIME)
                 status_msg += "HASS MQTT-Werte gesendet. "
 
             if MQTT_LOCAL_AKTIV:
