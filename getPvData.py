@@ -140,7 +140,7 @@ async def main():
                 client_mqtt.publish(MQTT_TOPIC + "power" , data.get("power"))
                 client_mqtt.publish(MQTT_TOPIC + "energy_today" , data.get("energy_today"))
                 client_mqtt.publish(MQTT_TOPIC + "energy_total" , data.get("energy_total")+ENERGY_TOTAL_KORR)
-                client_mqtt_local.publish(MQTT_TOPIC + "energy_total_uncorr" , float(data.get("energy_total"))*1000)  #WH
+                client_mqtt.publish(MQTT_TOPIC + "energy_total_uncorr" , float(data.get("energy_total"))*1000)  #WH
                 client_mqtt.publish(MQTT_TOPIC + "update_time" , jetzt)
                 client_mqtt.publish(MQTT_TOPIC + "boot_time" , str(BOOT_TIME))
                 client_mqtt.publish(MQTT_TOPIC + "uptime" , str(UPTIME))
