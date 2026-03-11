@@ -91,17 +91,19 @@ async def main():
     try:
         _LOGGER = asyncLogger.with_default_handlers(level=logging.INFO)                
         _LOGGER.info("connecting to SunnyBeam ...") 
-        s_beam = SunnyBeam()
-        await asyncio.sleep(2)
-        data = await s_beam.get_measurements()
-        _LOGGER.info("get_measurements:", data)
-    
+
         if MQTT_AKTIV:
             _LOGGER.info(f"connecting to {MQTT_BROKER} ")
             client_mqtt.connect(MQTT_BROKER, 1883)
             client_mqtt.loop_start()
             _LOGGER.info("✅ HASS MQTT 2.1 verbunden")
 
+        
+        s_beam = SunnyBeam()
+        await asyncio.sleep(2)
+        data = await s_beam.get_measurements()
+        _LOGGER.info("get_measurements:", data)
+    
         if MQTT_LOCAL_AKTIV:
             _LOGGER.info(f"connecting to local MQTT_BROKER ")
             client_mqtt_local.connect("localhost", 1883)
