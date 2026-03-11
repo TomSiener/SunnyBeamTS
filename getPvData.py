@@ -121,7 +121,7 @@ async def main():
             UPTIME=timedelta(seconds=int(UPTIME.total_seconds()))
 
             #SunnyBeam Connect when not already connected
-            if s_beam is none:            
+            if s_beam is None:            
                 try:
                     s_beam = SunnyBeam()
                     await asyncio.sleep(2)
