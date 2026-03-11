@@ -89,6 +89,7 @@ async def main():
     global FIRST_RUN 
     LAST_TIME = -1
     NOW_TIME = -1
+    s_beam = None
     try:
         _LOGGER = asyncLogger.with_default_handlers(level=logging.INFO)                
         _LOGGER.info("connecting to SunnyBeam ...") 
