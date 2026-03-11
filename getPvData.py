@@ -126,6 +126,10 @@ async def main():
                     await asyncio.sleep(2)
                 except Exception as err:
                     _LOGGER.error(f"Unexpected {err=}, {type(err)=}")                    
+                    if MQTT_AKTIV:
+                        jetzt = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+                        client_mqtt.publish(MQTT_TOPIC + "status_time" , jetzt)
+                        client_mqtt.publish(MQTT_TOPIC + "status" , f"Unexpected {err=}, {type(err)=}")
                     await asyncio.sleep(60)
                     continue
                 
@@ -139,6 +143,10 @@ async def main():
             except Exception as err:
                 _LOGGER.warning(f"Unexpected {err=}, {type(err)=}")
                 FIRST_RUN = True
+                if MQTT_AKTIV:
+                    jetzt = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+                    client_mqtt.publish(MQTT_TOPIC + "status_time" , jetzt)
+                    client_mqtt.publish(MQTT_TOPIC + "status" , f"Unexpected {err=}, {type(err)=}")                
                 await asyncio.sleep(60)
                 continue
     
