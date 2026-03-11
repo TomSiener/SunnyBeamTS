@@ -49,6 +49,7 @@ FIRST_RUN = True
 client_mqtt = None
 client_mqtt_local = None
 client_mb   = None
+s_beam = None
 
 #Boot- und Uptime ermittel n########################
 def get_boot_time():
@@ -97,13 +98,7 @@ async def main():
             client_mqtt.connect(MQTT_BROKER, 1883)
             client_mqtt.loop_start()
             _LOGGER.info("✅ HASS MQTT 2.1 verbunden")
-
-        
-        s_beam = SunnyBeam()
-        await asyncio.sleep(2)
-        data = await s_beam.get_measurements()
-        _LOGGER.info("get_measurements:", data)
-    
+            
         if MQTT_LOCAL_AKTIV:
             _LOGGER.info(f"connecting to local MQTT_BROKER ")
             client_mqtt_local.connect("localhost", 1883)
@@ -124,6 +119,16 @@ async def main():
             #Millisekunden abschneiden
             UPTIME=timedelta(seconds=int(UPTIME.total_seconds()))
 
+            #SunnyBeam Connect when not already connected
+            if s_beam is none:            
+                try:
+                    s_beam = SunnyBeam()
+                    await asyncio.sleep(2)
+                except Exception as err:
+                    _LOGGER.error(f"Unexpected {err=}, {type(err)=}")                    
+                    await asyncio.sleep(60)
+                    continue
+                
             # SunnyBeam auslesen
             try:
                 data = await s_beam.get_measurements()
