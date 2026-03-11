@@ -159,6 +159,9 @@ async def main():
                 client_mqtt.publish(MQTT_TOPIC + "update_time" , jetzt)
                 client_mqtt.publish(MQTT_TOPIC + "boot_time" , str(BOOT_TIME))
                 client_mqtt.publish(MQTT_TOPIC + "uptime" , str(UPTIME))
+                client_mqtt.publish(MQTT_TOPIC + "status_time" , jetzt)
+                client_mqtt.publish(MQTT_TOPIC + "status" , "OK")
+
                 status_msg += "HASS MQTT-Werte gesendet. "
 
             if MQTT_LOCAL_AKTIV:
