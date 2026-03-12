@@ -1,4 +1,5 @@
 #!/bin/bash
+echo "WfifiCheck executing as: $(whoami)"
 
 echo "Delay Start for 5 minutes"
 sleep 300
