@@ -3,7 +3,7 @@
 # Zeitstempel im Format: JAHR-MONAT-TAG_STUNDE-MINUTE-SEKUNDE
 TIMESTAMP=$(date +"%Y%m%d-%H-%M-%S")
 #LOGFILE="getPvData_${TIMESTAMP}.log"
-LOGFILE="/devl/null"
+LOGFILE="/dev/null"
 #ERRFILE="getPvData_err_${TIMESTAMP}.log"
 echo "Logfile $LOGFILE"
 
@@ -15,7 +15,7 @@ echo "activate python env"
 #source funktioniert mit redirect nicht mehr
 source /home/tom/.env/bin/activate
 pip -V
-echo "run getPvData"  #2>&1 | tee $LOGFILE
-python3 ./getPvData.py 
+echo "run getPvData" 
+python3 ./getPvData.py 2>&1 | tee $LOGFILE
 echo "after getPvData" 
 
