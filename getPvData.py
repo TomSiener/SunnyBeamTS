@@ -13,7 +13,7 @@ from datetime import timedelta
 from sunnybeamtool.sunnybeamtool import SunnyBeam
 
 logging.basicConfig()
-logging.getLogger().setLevel(logging.INFO)
+logging.getLogger().setLevel(logging.DEBUG)
 
 # --- LADE KONFIGURATION ---
 load_dotenv() # Liest die .env Datei ein
@@ -91,8 +91,7 @@ async def main():
     NOW_TIME = -1
     s_beam = None
     try:
-        _LOGGER = asyncLogger.with_default_handlers(level=logging.INFO)                
-        _LOGGER.info("connecting to SunnyBeam ...") 
+        _LOGGER = asyncLogger.with_default_handlers(level=logging.INFO)                        
 
         if MQTT_AKTIV:
             _LOGGER.info(f"connecting to {MQTT_BROKER} ")
@@ -123,6 +122,7 @@ async def main():
             #SunnyBeam Connect when not already connected
             if s_beam is None:            
                 try:
+                    _LOGGER.info("connecting to SunnyBeam ...") 
                     s_beam = SunnyBeam()
                     await asyncio.sleep(2)
                 except Exception as err:
