@@ -9,14 +9,15 @@ while true ; do
    if ifconfig | grep -q "inet 192." ; then
       sleep 60
    else
+      sleep 30
       echo "Network connection down! Check again."
       if ifconfig | grep -q "inet 192." ; then
          sleep 60
       else
          echo "Network connection still down! Attempting reconnection."
-         ifdown --force wlan0
+         ip link set wlan0 down
          sleep 10
-         ifup --force wlan0
+         ip llink set wlan0 up
          sleep 60
       fi
    fi
