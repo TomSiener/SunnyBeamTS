@@ -148,7 +148,7 @@ async def main():
                     jetzt = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
                     client_mqtt.publish(MQTT_TOPIC + "status_time" , jetzt)
                     client_mqtt.publish(MQTT_TOPIC + "status" , f"Unexpected {err=}, {type(err)=}")                
-                await asyncio.sleep(60)
+                await asyncio.sleep(30)
                 continue
     
             # 1. MQTT Senden
