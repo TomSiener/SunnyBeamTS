@@ -13,7 +13,7 @@ from datetime import timedelta
 from sunnybeamtool.sunnybeamtool import SunnyBeam
 
 logging.basicConfig()
-logging.getLogger().setLevel(logging.DEBUG)
+logging.getLogger().setLevel(logging.INFO)
 
 # --- LADE KONFIGURATION ---
 load_dotenv() # Liest die .env Datei ein
