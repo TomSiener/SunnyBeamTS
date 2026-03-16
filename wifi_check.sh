@@ -15,9 +15,12 @@ while true ; do
          sleep 60
       else
          echo "Network connection still down! Attempting reconnection."
-         ip link set wlan0 down
+         #ip link set wlan0 down
+         echo "nmcli radio wifi off"
+         nmcli radio wifi off
          sleep 10
-         ip link set wlan0 up
+         echo "nmcli radio wifi on"
+         nmcli radio wifi on
          sleep 60
       fi
    fi
