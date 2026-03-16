@@ -17,7 +17,7 @@ while true ; do
          echo "Network connection still down! Attempting reconnection."
          ip link set wlan0 down
          sleep 10
-         ip llink set wlan0 up
+         ip link set wlan0 up
          sleep 60
       fi
    fi
