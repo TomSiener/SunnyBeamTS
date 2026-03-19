@@ -10,13 +10,15 @@ while true ; do
       sleep 60
    else
       echo "Network connection down! Check again."
-      sleep 30      
+      sleep 60      
       if ifconfig | grep -q "inet 192." ; then
          sleep 60
       else
-         echo "Network connection still down! Attempting reconnection."
-         echo "systemctl restart NetworkManager"
-         systemctl restart NetworkManager
+         echo "Network connection still down. Rebooting."
+         reboot
+         #echo "Network connection still down! Attempting reconnection."
+         #echo "systemctl restart NetworkManager"
+         #systemctl restart NetworkManager
          #ip link set wlan0 down
          #echo "nmcli radio wifi off"
          #nmcli radio wifi off
