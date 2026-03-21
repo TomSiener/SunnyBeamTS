@@ -66,6 +66,8 @@ UPTIME = datetime.now() - BOOT_TIME
 #Millisekunden abschneiden
 UPTIME=timedelta(seconds=int(UPTIME.total_seconds()))
 logging.info(f"Uptime: {UPTIME}")
+UPTIME_SECONDS=int(UPTIME.total_seconds())
+logging.info(f"Uptime: {UPTIME} s")
 ################################################
 
 if MQTT_LOCAL_AKTIV:
@@ -129,6 +131,7 @@ async def main():
             UPTIME = datetime.now() - BOOT_TIME
             #Millisekunden abschneiden
             UPTIME=timedelta(seconds=int(UPTIME.total_seconds()))
+            UPTIME_SECONDS=int(UPTIME.total_seconds())
 
             #SunnyBeam Connect when not already connected
             if s_beam is None:            
@@ -171,6 +174,7 @@ async def main():
                 client_mqtt.publish(MQTT_TOPIC + "update_time" , jetzt)
                 client_mqtt.publish(MQTT_TOPIC + "boot_time" , str(BOOT_TIME))
                 client_mqtt.publish(MQTT_TOPIC + "uptime" , str(UPTIME))
+                client_mqtt.publish(MQTT_TOPIC + "uptime_seconds" , str(UPTIME_SECONDS))
                 client_mqtt.publish(MQTT_TOPIC + "status_time" , jetzt)
                 client_mqtt.publish(MQTT_TOPIC + "status" , "OK")
 
