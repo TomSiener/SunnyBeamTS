@@ -67,7 +67,7 @@ UPTIME = datetime.now() - BOOT_TIME
 UPTIME=timedelta(seconds=int(UPTIME.total_seconds()))
 logging.info(f"Uptime: {UPTIME}")
 UPTIME_SECONDS=int(UPTIME.total_seconds())
-logging.info(f"Uptime: {UPTIME} s")
+logging.info(f"Uptime seconds: {UPTIME_SECONDS} s")
 ################################################
 
 if MQTT_LOCAL_AKTIV:
