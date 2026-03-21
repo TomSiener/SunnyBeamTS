@@ -75,10 +75,14 @@ if MQTT_LOCAL_AKTIV:
     #client_mqtt_local.username_pw_set(MQTT_USER, MQTT_PW)
 
 if MQTT_AKTIV:
-    # Pflicht für Paho 2.1: CallbackAPIVersion angeben
-    logging.info("connecting to HASS MQTT ...") 
-    client_mqtt = mqtt.Client(mqtt.CallbackAPIVersion.VERSION2)
-    client_mqtt.username_pw_set(MQTT_USER, MQTT_PW)
+    try:
+        # Pflicht für Paho 2.1: CallbackAPIVersion angeben
+        logging.info("connecting to HASS MQTT ...") 
+        client_mqtt = mqtt.Client(mqtt.CallbackAPIVersion.VERSION2)
+        client_mqtt.username_pw_set(MQTT_USER, MQTT_PW)    
+    except Exception as err:        
+        logging.error(f"HASS MQTT connection failes {err=}, {type(err)=}")         
+        MQTT_AKTIV = false                
 
 if MODBUS_AKTIV:
     logging.info("connecting to Fronius ({FRONIUS_IP}}:{FRONIUS_PORT}) ...") 
