@@ -98,10 +98,15 @@ async def main():
         _LOGGER = asyncLogger.with_default_handlers(level=logging.INFO)                        
 
         if MQTT_AKTIV:
-            _LOGGER.info(f"connecting to {MQTT_BROKER} ")
-            client_mqtt.connect(MQTT_BROKER, 1883)
-            client_mqtt.loop_start()
-            _LOGGER.info("✅ HASS MQTT 2.1 verbunden")
+            try:
+                _LOGGER.info(f"connecting to {MQTT_BROKER} ")
+                client_mqtt.connect(MQTT_BROKER, 1883)
+                client_mqtt.loop_start()
+                _LOGGER.info("✅ HASS MQTT 2.1 verbunden")
+            except Exception as err:        
+                _LOGGER.error(f"HASS MQTT connection failes {err=}, {type(err)=}")         
+                MQTT_AKTIV = false                
+                
             
         if MQTT_LOCAL_AKTIV:
             _LOGGER.info(f"connecting to local MQTT_BROKER ")
