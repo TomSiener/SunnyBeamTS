@@ -94,6 +94,8 @@ async def main():
     LAST_TIME = -1
     NOW_TIME = -1
     s_beam = None
+    MQTT_AKTIV = True
+    
     try:
         _LOGGER = asyncLogger.with_default_handlers(level=logging.INFO)                        
 
