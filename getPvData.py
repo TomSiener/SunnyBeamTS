@@ -82,7 +82,7 @@ if MQTT_AKTIV:
         client_mqtt.username_pw_set(MQTT_USER, MQTT_PW)    
     except Exception as err:        
         logging.error(f"HASS MQTT connection failes {err=}, {type(err)=}")         
-        MQTT_AKTIV = false                
+        MQTT_AKTIV = False                
 
 if MODBUS_AKTIV:
     logging.info("connecting to Fronius ({FRONIUS_IP}}:{FRONIUS_PORT}) ...") 
@@ -105,7 +105,7 @@ async def main():
                 _LOGGER.info("✅ HASS MQTT 2.1 verbunden")
             except Exception as err:        
                 _LOGGER.error(f"HASS MQTT connection failes {err=}, {type(err)=}")         
-                MQTT_AKTIV = false                
+                MQTT_AKTIV = False                
                 
             
         if MQTT_LOCAL_AKTIV:
