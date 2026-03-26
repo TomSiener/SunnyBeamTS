@@ -1,0 +1,11 @@
+[Unit]
+Description=TS Wallbox TCP Server
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+ExecStartPre=/bin/sleep 15
+ExecStart=/bin/bash /home/tom/SunnyBeamTS/runTcpWallbox.sh
+
+[Install]
+WantedBy=multi-user.target
