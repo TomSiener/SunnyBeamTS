@@ -401,7 +401,7 @@ def run_updating_server():
     rt = RepeatedTimer(time, updating_writer, a_context)
 
     print("### start server, listening on " + str(modbus_port))
-    address = ("", modbus_port)
+    address = ("192.168.178.145", modbus_port)
     StartTcpServer(
             context=a_context,
             address=address,
