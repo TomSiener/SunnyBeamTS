@@ -1,18 +1,11 @@
 #!/usr/bin/env python
 """
-v0.2
-Updated Version tested with OpenDTU and Gen24 Frimware > 1.30
-
-Simulates a Fronius Smart Meter for providing necessary
-information to inverters (e.g. Gen24).
-Can be used with OpenDTU.
-Necessary information is provied via MQTT and translated to MODBUS TCP
+Second TcpServer for Wallbox on port 1502
 Based on
 https://www.photovoltaikforum.com/thread/185108-fronius-smart-meter-tcp-protokoll
 --------------------------------
 TS:
 Config-Werte aus .env
-local mqtt
 """
 
 ###############################################################
@@ -91,12 +84,12 @@ class RepeatedTimer(object):
 # --- LADE KONFIGURATION ---
 load_dotenv() # Liest die .env Datei ein
 # MQTT Einstellungen
-MQTT_BROKER = "localhost" #os.getenv("MQTT_BROKER")
+MQTT_BROKER = os.getenv("MQTT_BROKER")
 MQTT_USER   = os.getenv("MQTT_USER")
 MQTT_PW     = os.getenv("MQTT_PW")
-MQTT_TOPIC  = "PV/SunnyBeam/"
+MQTT_TOPIC  = "PV/Wallbox/"
 MQTT_POWER = MQTT_TOPIC + "power"
-MQTT_TOTAL = MQTT_TOPIC + "energy_total"
+MQTT_TOTAL = MQTT_TOPIC + "energy_used_total"
 
 mqttconf = {
             'username':MQTT_USER,
@@ -105,8 +98,8 @@ mqttconf = {
             'port': 1883
 }
 MQTT_TOPIC_CONSUMPTION  = MQTT_POWER #OpenDTU Watts
-MQTT_TOPIC_TOTAL_IMPORT = "" #Import Wh
-MQTT_TOPIC_TOTAL_EXPORT = MQTT_TOTAL #Export WH
+MQTT_TOPIC_TOTAL_IMPORT = MQTT_TOTAL #Import Wh
+MQTT_TOPIC_TOTAL_EXPORT = "" #Export WH
 MQTT_TOPIC_L1_CONSUMPTION = "" # L1 Watts
 MQTT_TOPIC_L2_CONSUMPTION= "" # L2 Watts
 MQTT_TOPIC_L3_CONSUMPTION = "" # L3 Watts, empty -> L1,L2,L3 i                                                                                                             s calculated
@@ -115,7 +108,7 @@ MQTT_TOPIC_L3_CONSUMPTION = "" # L3 Watts, empty -> L1,L2,L3 i                  
 corrfactor = 1 # or 1000 
 i_corrfactor = int(corrfactor)
 
-modbus_port = 502
+modbus_port = 1502
 
 ###############################################################
 # MQTT service
@@ -156,7 +149,7 @@ def isfloat(num):
 
 def init_mqtt():
     mqttc = mqtt.Client(mqtt.CallbackAPIVersion.VERSION1,"SmartMeter",clean_session=False)
-    #mqttc.username_pw_set(mqttconf['username'], mqttconf['password'])
+    mqttc.username_pw_set(mqttconf['username'], mqttconf['password'])
     mqttc.connect(mqttconf['address'], mqttconf['port'], 60)
 
     mqttc.subscribe(MQTT_TOPIC_CONSUMPTION)
