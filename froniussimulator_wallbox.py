@@ -103,7 +103,7 @@ MQTT_TOPIC_TOTAL_EXPORT = "" #Export WH
 MQTT_TOPIC_L1_CONSUMPTION = "" # L1 Watts
 MQTT_TOPIC_L2_CONSUMPTION= "" # L2 Watts
 MQTT_TOPIC_L3_CONSUMPTION = "" # L3 Watts, empty -> L1,L2,L3 i                                                                                                             s calculated
-#MQTT_TOPIC_TIME = "FSM/Time" #Timestamp for Check MK
+MQTT_TOPIC_TIME = "FSM/Time" #Timestamp for Check MK
 
 corrfactor = 1 # or 1000 
 i_corrfactor = int(corrfactor)
@@ -192,8 +192,8 @@ def on_message(client, userdata, message):
     global l3
     global rtime
 
-#    print("Received message '" + str(message.payload) + "' on topic '"
-#        + message.topic + "' with QoS " + str(message.qos))
+    print("Received message '" + str(message.payload) + "' on topic '"
+        + message.topic + "' with QoS " + str(message.qos))
 
     if not isfloat(message.payload):
         return
