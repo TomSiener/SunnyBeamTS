@@ -192,8 +192,8 @@ def on_message(client, userdata, message):
     global l3
     global rtime
 
-    print("Received message '" + str(message.payload) + "' on topic '"
-        + message.topic + "' with QoS " + str(message.qos))
+    #print("Received message '" + str(message.payload) + "' on topic '"
+    #    + message.topic + "' with QoS " + str(message.qos))
 
     if not isfloat(message.payload):
         return
