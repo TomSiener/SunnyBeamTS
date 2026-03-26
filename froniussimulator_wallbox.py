@@ -355,8 +355,8 @@ def run_updating_server():
                 83,109,97,114,116,32,77,101,116,101,114,32,54,51,65,0, #Device Model "Smart Meter
                 0,0,0,0,0,0,0,0,                                       #Options N/A
                 0,0,0,0,0,0,0,0,                                       #Software Version  N/A
-                48,48,48,48,48,48,48,50,0,0,0,0,0,0,0,0,               #Serial Number: 00000 (should be different if there are more Smart Meters)
-                240],                                                  #Modbus TCP Address:
+                48,48,48,48,48,48,48,50,0,0,0,0,0,0,0,1,               #Serial Number: 00000 (should be different if there are more Smart Meters)
+                241],                                                  #Modbus TCP Address:
         40070: [213],
         40071: [124],
         40072: [0,0,0,0,0,0,0,0,0,0,
