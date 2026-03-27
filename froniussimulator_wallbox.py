@@ -269,8 +269,8 @@ def updating_writer(a_context):
     #print (einspeisung_corr)
 
     #Converting values of MQTT payload to Modbus register
-    #TS: power negative
-    ep_int1, ep_int2 = calculate_register(-float(leistung))
+    #TS: power negative - doch nicht negativ, da Strom vom WR weg als negativ angezeigt wird im WR
+    ep_int1, ep_int2 = calculate_register(float(leistung))
     ti_int1, ti_int2 = calculate_register(netzbezug_corr)
     exp_int1, exp_int2 = calculate_register(einspeisung_corr)
 
