@@ -1,5 +1,10 @@
 # SunnyBeamToolTS
 
+  - läuft auf tomspi2 und ist per USB mit dem Sunny-Beam-Display verbunden um die PV-DAten dem Fronius-WR bereitzustellen
+  - stellt zusätzlich die Daten dem Homeassistant (tomspi3) bereit.
+  - liest den Wallbox Verbrauch per MQTT com Homeassistant und stellt sie auf dem WR als Verbraucher bereit
+  - wird vom Homeassistnat überwacht und ggf. neu gestartet
+
 ### GetPVData.py  
   liest die PV-DAten ser SunnyBoys über USB vom SunnyBeam-Display aus.
 
