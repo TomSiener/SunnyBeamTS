@@ -19,7 +19,7 @@
     siumuliert einen Fronius SmartMeter um den Wallbox-Verbrauch dem Fonius Gen24 Wechselrichter über ModbusTCP bereitzustellen
 
 ### wifi_check.sh   
-    prüft alle Minute das vorhandensein der IP-Adresse und rebootet im Fehlefall
+    prüft alle Minute das vorhandensein der IP-Adresse und rebootet im Fehlerfall
 
 -----------------------------------------------------------------
 
