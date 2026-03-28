@@ -16,3 +16,11 @@
 ### wifi_check.sh   
     prüft alle Minute das vorhandensein der IP-Adresse und rebootet im Fehlefall
 
+-----------------------------------------------------------------
+
+### run...sh
+    starten die python env und die obigen Python Scrypte
+
+---------------------------------------------------------------
+### Unterordner **services**
+    systemd service unit files zum starten der obigen scripte als systemd-services
