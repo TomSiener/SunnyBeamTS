@@ -105,7 +105,7 @@ MQTT_TOPIC_L2_CONSUMPTION= "" # L2 Watts
 MQTT_TOPIC_L3_CONSUMPTION = "" # L3 Watts, empty -> L1,L2,L3 i                                                                                                             s calculated
 MQTT_TOPIC_TIME = "FSM/Time" #Timestamp for Check MK
 
-corrfactor = 1 # or 1000 
+corrfactor = 1000 # or 1
 i_corrfactor = int(corrfactor)
 
 modbus_port = 1502
