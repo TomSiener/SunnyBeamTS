@@ -12,7 +12,7 @@
   - ```get_today_measurements()``` historical power of the current day (datetime, power in W)                   <- nicht verwendet
   - ```get_last_month_measurements()``` historical energy per day of the last month (datetime, energy in kWh)   <- nicht verwendet
 
-### froniussimulator_3_noCheckMK.py
+### froniussimulator_pv.py
     siumuliert einen Fronius SmartMeter um die PV-Daten dem Fonius Gen24 Wechselrichter über ModbusTCP bereitzustellen
 
 ### froniussimulator_wallbox.py
