@@ -1,9 +1,13 @@
-# SunnyBeamToolPython
+# SunnyBeamToolTS
 
-Python library for accessing the Sunny Beam device from SMA. Reads power production of the solar panels through the Sunny Beam:
+***GetPVData.py***  liest die PV-DAten ser SunnyBoys über USB vom SunnyBeam-Display aus.
 
-- ```get_measurements()``` current production (power in W, daily energy in kWh, total energy in kWh)
-- ```get_today_measurements()``` historical power of the current day (datetime, power in W)
-- ```get_last_month_measurements()``` historical energy per day of the last month (datetime, energy in kWh)
+  - ```get_measurements()``` current production (power in W, daily energy in kWh, total energy in kWh)
+  - ```get_today_measurements()``` historical power of the current day (datetime, power in W)
+  - ```get_last_month_measurements()``` historical energy per day of the last month (datetime, energy in kWh)
 
-Code is based on <https://github.com/SBFspot/SunnyBeamTool> and ported from C to python. Credits go to michael  <mich dot peeters at gmail dot com> and Stefan Arts, Holland <stuffie at steunopensource dot nl>
+***froniussimulator_3_noCheckMK.py***  siumuliert einen Fronius SmartMeter um die PV-Daten dem Fonius Gen24 Wechselrichter über ModbusTCP bereitzustellen
+***froniussimulator_wallbox.py***  siumuliert einen Fronius SmartMeter um den Wallbox-Verbrauch dem Fonius Gen24 Wechselrichter über ModbusTCP bereitzustellen
+
+***wifi_check.sh*** prüft alle Minute das vorhandensein der IP-Adresse und rebootet im Fehlefall
+
