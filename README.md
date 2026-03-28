@@ -1,6 +1,6 @@
 # SunnyBeamToolTS
 
-### #GetPVData.py  
+### GetPVData.py  
   liest die PV-DAten ser SunnyBoys über USB vom SunnyBeam-Display aus.
 
   - ```get_measurements()``` current production (power in W, daily energy in kWh, total energy in kWh)
