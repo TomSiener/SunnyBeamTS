@@ -1,7 +1,7 @@
 # SunnyBeamToolTS
 
   - läuft auf tomspi2 und ist per USB mit dem Sunny-Beam-Display verbunden um die PV-DAten dem Fronius-WR bereitzustellen.
-  - stellt zusätzlich die Daten dem Homeassistant (tomspi3) bereit.
+  - stellt zusätzlich die Daten dem Homeassistant (tomspi3) per MQTT bereit.
   - liest den Wallbox Verbrauch per MQTT vom Homeassistant und stellt sie auch dem WR als Verbraucher bereit.
   - wird vom Homeassistnat überwacht und ggf. neu gestartet.
 
