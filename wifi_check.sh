@@ -7,12 +7,12 @@ sleep 300
 echo "Starting WiFi Check every minute"
 while true ; do
    if ifconfig | grep -q "inet 192." ; then
-      sleep 60
+      sleep 90
    else
       echo "Network connection down! Check again."
-      sleep 60      
+      sleep 90      
       if ifconfig | grep -q "inet 192." ; then
-         sleep 60
+         sleep 90
       else
          echo "Network connection still down. Rebooting."
          reboot
@@ -25,7 +25,7 @@ while true ; do
          #sleep 10
          #echo "nmcli radio wifi on"
          #nmcli radio wifi on
-         sleep 60
+         sleep 90
       fi
    fi
 done
